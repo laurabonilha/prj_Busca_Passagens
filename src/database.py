@@ -15,17 +15,18 @@ class DataBase:
                 destino TEXT,
                 data_chegada TEXT,
                 data_saida TEXT,
-                status TEXT DEFAULT 'pendente'
+                status TEXT DEFAULT 'pendente',
+                tipo_passagem TEXT
             )
         """)
         var_dbConexao.commit()
         var_dbConexao.close()
 
-    def adiciona_item_fila(self, arg_origem, arg_destino, arg_dataInicio, arg_dataFim):
+    def adiciona_item_fila(self, arg_origem, arg_destino, arg_dataInicio, arg_dataFim, arg_tipoPassagem):
         var_dbConexao = sqlite3.connect(self.arg_caminhoDB)
         var_dbCursor = var_dbConexao.cursor()
-        var_dbCursor.execute("INSERT INTO fila_passagens (origem, destino, data_chegada, data_saida) VALUES (?, ?, ?, ?)", 
-                       (arg_origem, arg_destino, arg_dataInicio, arg_dataFim))
+        var_dbCursor.execute("INSERT INTO fila_passagens (origem, destino, data_chegada, data_saida, tipo_passagem) VALUES (?, ?, ?, ?, ?)", 
+                       (arg_origem, arg_destino, arg_dataInicio, arg_dataFim, arg_tipoPassagem))
 
     def captura_itens_pendentes(self):
         # Obtem os itens pendentes da fila
