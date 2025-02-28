@@ -1,7 +1,7 @@
 import sqlite3
 
 class DataBase:
-    def __init__(self, arg_caminhoDB='data/fila.db'):
+    def __init__(self, arg_caminhoDB='data\database\fila.db'):
         self.arg_caminhoDB = arg_caminhoDB
 
     def cria_tabela(self):

@@ -6,9 +6,10 @@ class Web:
         self.bot = WebBot()
         self.bot.headless = False  # True - roda em modo invisível
         self.bot.browser = "chrome"
-        self.bot.start_browser()
+        
 
     def busca_passagem_onibus(self, arg_origem, arg_destino, arg_dataInicio, arg_dataFim):
+        self.bot.start_browser()
         var_strUrlOnibus = 'https://www.clickbus.com.br/'
         self.bot.navigate_to(var_strUrlOnibus)
         self.bot.maximize_window()
@@ -21,4 +22,3 @@ class Web:
 
         self.bot.find_element(element='destination', by=By.ID).type(arg_destino)
 
-        
