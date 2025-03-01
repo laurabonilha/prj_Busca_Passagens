@@ -1,7 +1,7 @@
 import sqlite3
 
 class DataBase:
-    def __init__(self, arg_caminhoDB='data\database\fila.db'):
+    def __init__(self, arg_caminhoDB=r'data\database\fila.db'):
         self.arg_caminhoDB = arg_caminhoDB
 
     def cria_tabela(self):
@@ -25,9 +25,11 @@ class DataBase:
     def adiciona_item_fila(self, arg_origem, arg_destino, arg_dataInicio, arg_dataFim, arg_tipoPassagem):
         var_dbConexao = sqlite3.connect(self.arg_caminhoDB)
         var_dbCursor = var_dbConexao.cursor()
-        var_dbCursor.execute("INSERT INTO fila_passagens (origem, destino, data_chegada, data_saida, tipo_passagem) VALUES (?, ?, ?, ?, ?)", 
+        var_dbCursor.execute("INSERT INTO fila (origem, destino, data_chegada, data_saida, tipo_passagem) VALUES (?, ?, ?, ?, ?)", 
                        (arg_origem, arg_destino, arg_dataInicio, arg_dataFim, arg_tipoPassagem))
-
+        var_dbConexao.commit()
+        var_dbConexao.close()
+        
     def captura_itens_pendentes(self):
         # Obtem os itens pendentes da fila
         var_dbConexao = sqlite3.connect(self.arg_caminhoDB)
