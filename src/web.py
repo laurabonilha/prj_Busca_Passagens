@@ -6,6 +6,7 @@ class Web:
         self.bot = WebBot()
         self.bot.headless = False  # True - roda em modo invisível
         self.bot.browser = "chrome"
+        self.bot.driver_path = r"C:\chrome_driver\chromedriver.exe"
         
 
     def busca_passagem_onibus(self, arg_origem, arg_destino, arg_dataInicio, arg_dataFim):
@@ -18,7 +19,22 @@ class Web:
         # Aguarda o carregamento do bloco de pesquisa por até 10 segundos
         self.bot.wait_for_element_visibility(element=var_elmBlocoPesquisa, visible=True, waiting_time=10000)
 
-        self.bot.find_element(element='origin', by=By.ID).type(arg_origem)
+        # Inserindo origem
+        var_elmInputOrigem = self.bot.find_element(selector='origin', by=By.ID)
+        var_elmInputOrigem.clear()
+        var_elmInputOrigem.send_keys(arg_origem)
+        # Verificando se há mais de uma correspondência de local
+        try:
+            var_elmCorrespondencia = self.bot.find_element(selector='//*[@id="place-input-ul"]/a', by=By.XPATH)
+            print("O site retornou correspondência para o local de origem. Verificando se há mais de uma")
+        except:
+            print("Não retornou correspondências do local de origem")
 
-        self.bot.find_element(element='destination', by=By.ID).type(arg_destino)
+
+
+        
+        # Inserindo destino
+        var_elmInputDestino = self.bot.find_element(selector='destination', by=By.ID)
+        var_elmInputDestino.clear()
+        var_elmInputDestino.send_keys(arg_destino)
 

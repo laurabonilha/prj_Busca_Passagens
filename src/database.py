@@ -34,7 +34,7 @@ class DataBase:
         # Obtem os itens pendentes da fila
         var_dbConexao = sqlite3.connect(self.arg_caminhoDB)
         var_dbCursor = var_dbConexao.cursor()
-        var_dbCursor.execute("SELECT * FROM fila_passagens WHERE status = 'pendente'")
+        var_dbCursor.execute("SELECT * FROM fila WHERE status = 'pendente'")
         var_qtdItensPendentes = var_dbCursor.fetchall()
         var_dbConexao.close
         return var_qtdItensPendentes

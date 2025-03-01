@@ -29,5 +29,10 @@ class AutomationManager:
         var_itensProcess = self.var_clssDataBase.captura_itens_pendentes()
         var_resultadoItensProcess = []
 
-        for item in var_resultadoItensProcess:
-            pass
+        for item in var_itensProcess:
+            var_itemId, var_itemOrigem, var_itemDestino, var_itemDataInicio, var_itemDataFim, var_itemStatus, var_itemTipoPassagem = item
+            print(f" Buscando passagens de {var_itemOrigem} para {var_itemDestino} em {var_itemDataInicio} até {var_itemDataFim}...")
+            self.var_classWeb.busca_passagem_onibus(arg_origem=var_itemOrigem, arg_destino=var_itemDestino, arg_dataInicio=var_itemDataInicio, arg_dataFim=var_itemDataFim)
+
+manager = AutomationManager()
+manager.process()
